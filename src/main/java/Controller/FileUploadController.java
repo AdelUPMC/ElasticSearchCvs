@@ -37,7 +37,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 
-
+/**
+ * 
+ * @author kderb,Adel,shoukoufa,taheri
+ *
+ */
 
 
 
@@ -62,7 +66,13 @@ public class FileUploadController {
 	public String UploadPage(Model model) {
 		return "uploadview";
 	}
-	
+	/**
+	 * cette methode permet de parser un fichier et de l'indexer
+	 * @param model
+	 * @param files
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping("/upload")
 	public String upload(Model model,@RequestParam ("files") MultipartFile[] files) throws IOException {
 		byte[] data = null;
@@ -109,8 +119,8 @@ public class FileUploadController {
 			      
 		    
 			 	 j=j+1;
-			 	 
-			      IndexResponse response = client.prepareIndex("cvsliste", "id",Integer.toString(j))
+			
+			      IndexResponse response = client.prepareIndex("cvdata", "id",Integer.toString(j))
 			                .setSource(jsonBuilder()
 			                        .startObject()
 			                        .field("path",fileNamePath.toString())
@@ -120,8 +130,7 @@ public class FileUploadController {
 			                        .endObject()
 			                )
 			                .get();
-			      
-			   System.out.println( "je suis la"+response.getResult().toString());
+		
 			 	 contennue.add(texte);
 		    
 			      model.addAttribute("msg","succsesufl upload"+texte); 
@@ -139,32 +148,27 @@ public class FileUploadController {
 		    	  if(texte.contains("java")) {
 			    	  langageString="java";
 			      }
-		    	
+		    	j=j+1;
 		    	  
-			      IndexResponse response = client.prepareIndex("listecvs", "id",Integer.toString(j++))
+			      IndexResponse response = client.prepareIndex("cvdata", "id",Integer.toString(j))
 			                .setSource(jsonBuilder()
 			                        .startObject()
 			                        .field("path",fileNamePath.toString())
-			                        .field("contennue",langageString)
+			                        .field("langage",langageString)
 			                        
 			                        .endObject()
 			                )
 			                .get();
 			      
-			   System.out.println( response.getResult().toString());
+			      
+			 
+			   System.out.println( "+++++++++++++++"+response.getResult().toString());
 			 
 			      
 		    	 contennue.add(texte);
 		    	 model.addAttribute("msg",texte);
-		     }else {
-		    	
-		    	 
-		  }
-		    
-		
-		   
-		      
-		//String dataString = new String(data, StandardCharsets.UTF_8);
+		     }
+	
 		}
 		
 	

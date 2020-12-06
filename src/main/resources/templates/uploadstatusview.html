@@ -1,18 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Find Profil</title>
 </head>
 <body>
-<div th:if="${msg}">
+	<div class="container">
+		<br />
+		<div class="row">
+        <form action="rest/cv/view/1" method="post" enctype="multipart/form-data">
+				<div class="col-md-7">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong>Search Profiles</strong> <small> </small>
+						</div>
+						<div class="panel-body">
+							<div class="input-group image-preview">
+								<input  type="text"
+									class="form-control image-preview-filename"  th:text="${searchvalue}"  >
+								<!-- don't give a name === doesn't send on POST/GET -->
+								<span class="input-group-btn"> <!-- image-preview-clear button -->
+								
+									
+										<button type="submit" class="btn btn-labeled btn-default">
+										<span class="btn-label"><i
+											class="glyphicon glyphicon-search"></i> </span>search
+									</button>
+								</span>
+								
+							</div>
+							<!-- /input-group image-preview [TO HERE]-->
 
-<span th:text="${msg}"></span>
+							<br />
 
-</div>
-<div th:if="${msg}">
+						<span ><a href="/">Upload more</a></span>
 
-<span ><a href="/">Upload moreeee</a></span>
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+
+
+
+</body>
+</html>
+
+
 
 </div>
 </body>
